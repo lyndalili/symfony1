@@ -1,0 +1,14 @@
+{% extends 'randa.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+
+<h1> Edition d'un utilisateur</h1>
+
+  {{ form_start(formu)}}
+  {{ form_row(formu.firstName)}}
+  {{ form_row(formu.lastName)}}
+{{ form_end(formu)}}
+
+{% endblock %}

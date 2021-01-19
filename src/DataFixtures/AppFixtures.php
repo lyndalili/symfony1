@@ -36,12 +36,13 @@ class AppFixtures extends Fixture
             for ($j = 0; $j < rand(10, 50); $j++) {
                 $news = new News();
                 $news
-                    ->setTitle($generator->sentence)
-                    ->setContent($generator->text())
+                    ->setTitle($generator->sentence())
+                    ->setContent($generator->text(2000))
                     ->setStatus(
                         $generator->randomElement(['DRAFT', 'PUBLISHED', 'DELETED'])
                     )
                     ->setCreatedAt($generator->dateTimeBetween('-1 year', 'now'))
+                    ->setImgUrl($generator->imageUrl(750,500))
                     ->setUser($user);
                 $manager->persist($news);
             }

@@ -2,9 +2,11 @@
 // src/Controller/postController.php
 namespace App\Controller;
 
-use Symfony\Component\HttpFoundation\Response; //defeinition de la class
+use App\Entity\News;
+use App\Repository\NewsRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response; //defeinition de la class
 
 class postController extends AbstractController  // creation class contoleur
 
@@ -15,20 +17,29 @@ class postController extends AbstractController  // creation class contoleur
       */
 
        
-    public function index(): Response //cree une fonction on determine le type de retour "reponse"
+    public function index(NewsRepository $newsRepository): Response //cree une fonction on determine le type de retour "reponse"
     {
          //ligne php avec nombre aleatoire 
 
-  
-        return $this->render('post/index.html.twig');
+  //$news = $newsRepository->findAll();
+  $lastNews = $newsRepository->findLastNews(10);
+  $oldNews = $newsRepository->findOldNews();
+  //dd($oldNews);
+        return $this->render('post/index.html.twig', [
+            "lastNews" => $lastNews,
+            "oldNews" => $oldNews,
+        ]);
     }
     /**
      * @Route("/view/{id}", name="post_view", methods={"GET"}, requirements={"page"="id\d+"})
       */
-    public function view($id): Response {
+    public function view(NewsRepository $newsRepository, News $news) {
+        
+        $oldNews = $newsRepository->findOldNews();
         return $this->render('post/view.html.twig',[ 
       
-            'id' => $id,
+            'news' => $news,
+            "oldNews" => $oldNews,
         ]);
 
         

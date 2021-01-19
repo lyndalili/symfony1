@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -36,13 +37,21 @@ class User implements UserInterface
      */
     private $password;
 
+     /**
+     * @var string The plain password
+     
+     */
+    private $plainPassword;
+
     /**
      * @ORM\Column(type="string", length=255)
+     * @assert\Length(min=3, max=30)
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @assert\Length(min=2, max=30)
      */
     private $lastName;
 
@@ -109,10 +118,23 @@ class User implements UserInterface
     {
         return (string) $this->password;
     }
+    public function getPlainPassword(): ?string
+    {
+        return (string) $this->plainPassword;
+    }
+
+
+
 
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+    public function setPlainPassword(?string $password): self
+    {
+        $this->plainPassword = $password;
 
         return $this;
     }

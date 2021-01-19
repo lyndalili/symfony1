@@ -8,44 +8,22 @@
         <section>
             <div class="row">
                 <div class="col-md-8">
+                {% for news in lastNews %}
                     <article class="blog-post">
                         <div class="blog-post-image">
-                            <a href="{{ path('post_view', {id: 1}) }}"><img src="images/750x500-1.jpg" alt=""></a>
+                            <a href="{{ path('post_view', {id: news.id}) }}"><img src="{{ news.imgUrl}}" alt=""></a>
                         </div>
                         <div class="blog-post-body">
-                            <a href="{{ path('post_view', {id: 2}) }}">Vintage-Inspired Finds for Your Home</a></h2>
-                            <div class="post-meta"><span>by <a href="#">Jamie Mooze</a></span>/<span><i class="fa fa-clock-o"></i>March 14, 2015</span>/<span><i class="fa fa-comment-o"></i> <a href="#">343</a></span></div>
-                            <p>ew months ago, we found ridiculously cheap plane tickets for Boston and off we went. It was our first visit to the city and, believe it or not, Stockholm in February was more pleasant than Boston in March. It probably has a
-                                lot to do with the fact that we arrived completely unprepared. That I, in my converse and thin jacket, did not end up with pneumonia is honestly not even fair.</p>
-                            <div class="read-more"><a href="#">Continue Reading</a></div>
+                            <h2><a href="{{ path('post_view', {id: news.id}) }}">{{news.title}}</a></h2>
+                            <div class="post-meta"><span>par <a href="#">{{news.user.firstName}}{{news.user.lastName}}</a></span>/<span><i class="fa fa-clock-o"></i>{{news.createdAt | ago }}</span>/<span><i class="fa fa-comment-o"></i> <a href="#">343</a></span></div>
+                            <p>{{news.content | u.truncate(100,"...")}}</p>
+                            <div class="read-more"><a href="{{ path('post_view', {id: news.id}) }}">Continue Reading</a></div>
                         </div>
-                    </article>
-                    <!-- article -->
-                    <article class="blog-post">
-                        <div class="blog-post-image">
-                            <a href="{{ path('post_view', {id: 3}) }}"><img src="images/750x500-2.jpg" alt=""></a>
-                        </div>
-                        <div class="blog-post-body">
-                            <h2><a href="post.html">The Best Street Style Looks of London Fashion Week</a></h2>
-                            <div class="post-meta"><span>by <a href="#">Jamie Mooze</a></span>/<span><i class="fa fa-clock-o"></i>March 14, 2015</span>/<span><i class="fa fa-comment-o"></i> <a href="#">343</a></span></div>
-                            <p>Few months ago, we found ridiculously cheap plane tickets for Boston and off we went. It was our first visit to the city and, believe it or not, Stockholm in February was more pleasant than Boston in March. It probably has
-                                a lot to do with the fact that we arrived completely unprepared.</p>
-                            <div class="read-more"><a href="#">Continue Reading</a></div>
-                        </div>
-                    </article>
-                    <!-- article -->
-                    <article class="blog-post">
-                        <div class="blog-post-image">
-                            <a href="{{ path('post_view', {id: 4}) }}"><img src="images/750x500-3.jpg" alt=""></a>
-                        </div>
-                        <div class="blog-post-body">
-                            <h2><a href="{{ path('post_view', {id: 5}) }}">Front Row Style: Our Favorite A-List Moments of Fashion Week</a></h2>
-                            <div class="post-meta"><span>by <a href="#">Jamie Mooze</a></span>/<span><i class="fa fa-clock-o"></i>March 14, 2015</span>/<span><i class="fa fa-comment-o"></i> <a href="#">343</a></span></div>
-                            <p>It was our first visit to the city and, believe it or not, Stockholm in February was more pleasant than Boston in March. It probably has a lot to do with the fact that we arrived completely unprepared. Few months ago, we found
-                                ridiculously cheap plane tickets for Boston and off we went.</p>
-                            <div class="read-more"><a href="#">Continue Reading</a></div>
-                        </div>
-                    </article>
+                    
+                </article>
+                
+                
+                {% endfor %}
                 </div>
                {{ include('sidebar.html.twig')}}
             </div>

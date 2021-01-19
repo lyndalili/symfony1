@@ -1,0 +1,22 @@
+{% extends 'randa.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+
+<h1> Le profil</h1>
+
+   <ul class="list-group">
+      <li class="list-group-item"> Nom : {{ app.user.lastName }} </li>
+      <li class="list-group-item"> prenom :{{ app.user.firstName }}</li>
+      <li class="list-group-item"> E-mail :{{ app.user.email}}</li>
+      <li class="list-group-item"> 
+  
+          <h2> Les artciles<h2> 
+           {% for news in app.user.news %}
+             <div><a href="{{ path('post_view', {id: news.id}) }}">{{news.title}}</a></div>
+          {% endfor %}
+      </li>
+</ul>
+
+{% endblock %}

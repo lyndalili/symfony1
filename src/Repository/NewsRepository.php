@@ -18,6 +18,38 @@ class NewsRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, News::class);
     }
+    //requete en query builder
+    public function findLastNews(int $nb = 5)
+    {
+        return $this->createQueryBuilder('n')  //definir les ellement opptionel de la requete query builder
+            ->andWhere('n.status = :status')
+            ->setParameter('status',"PUBLISHED")
+            ->orderBy('n.createdAt', 'DESC')
+            ->setMaxResults($nb)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    //une requete en sql
+    public function findOldNews(int $nb = 5): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT n.id, n.title, n.createdAt, n.imgUrl
+            FROM App\Entity\News n
+            WHERE n.status = :status
+            ORDER BY n.createdAt ASC'
+        )->setParameter('status', "PUBLISHED")
+        ->setMaxResults($nb);
+
+        // returns an array of Product objects
+        return $query->getResult();
+    }
+
+
+
 
     // /**
     //  * @return News[] Returns an array of News objects

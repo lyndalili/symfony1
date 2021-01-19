@@ -14,61 +14,20 @@
                         <div class="sidebar-widget">
                             <h3 class="sidebar-title">Featured Posts</h3>
                             <div class="widget-container">
+
+                            {% for news in oldNews %}
                                 <article class="widget-post">
                                     <div class="post-image">
-                                        <a href="post.html"><img src="{{asset('images/90x60-1.jpg')}}" alt=""></a>
+                                        <a href="post.html"><img src="{{ news.imgUrl}}" alt=""></a>
                                     </div>
                                     <div class="post-body">
-                                        <h2><a href="post.html">The State of the Word 2014</a></h2>
+                                        <h2><a href="{{ path('post_view', {id: news.id}) }}">{{news.title}}</a></h2>
                                         <div class="post-meta">
-                                            <span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="post.html"><i class="fa fa-comment-o"></i> 23</a></span>
+                                            <span><i class="fa fa-clock-o"></i> {{news.createdAt | ago }}</span> <span><a href="post.html"><i class="fa fa-comment-o"></i> 23</a></span>
                                         </div>
                                     </div>
                                 </article>
-                                <article class="widget-post">
-                                    <div class="post-image">
-                                        <a href="post.html"><img src="{{asset('images/90x60-2.jpg')}}" alt=""></a>
-                                    </div>
-                                    <div class="post-body">
-                                        <h2><a href="post.html">Why The Muppets Needs to Channel 30 Rock</a></h2>
-                                        <div class="post-meta">
-                                            <span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="post.html"><i class="fa fa-comment-o"></i> 23</a></span>
-                                        </div>
-                                    </div>
-                                </article>
-                                <article class="widget-post">
-                                    <div class="post-image">
-                                        <a href="post.html"><img src="{{asset('images/90x60-3.jpg')}}" alt=""></a>
-                                    </div>
-                                    <div class="post-body">
-                                        <h2><a href="post.html">The State of the Word 2014</a></h2>
-                                        <div class="post-meta">
-                                            <span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="post.html"><i class="fa fa-comment-o"></i> 23</a></span>
-                                        </div>
-                                    </div>
-                                </article>
-                                <article class="widget-post">
-                                    <div class="post-image">
-                                        <a href="post.html"><img src="{{asset('images/90x60-4.jpg')}}" alt=""></a>
-                                    </div>
-                                    <div class="post-body">
-                                        <h2><a href="post.html">Vintage-Inspired Finds for Your Home</a></h2>
-                                        <div class="post-meta">
-                                            <span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="post.html"><i class="fa fa-comment-o"></i> 23</a></span>
-                                        </div>
-                                    </div>
-                                </article>
-                                <article class="widget-post">
-                                    <div class="post-image">
-                                        <a href="post.html"><img src="{{asset('images/90x60-5.jpg')}}" alt=""></a>
-                                    </div>
-                                    <div class="post-body">
-                                        <h2><a href="post.html">The State of the Word 2014</a></h2>
-                                        <div class="post-meta">
-                                            <span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="post.html"><i class="fa fa-comment-o"></i> 23</a></span>
-                                        </div>
-                                    </div>
-                                </article>
+                             {% endfor %}
                             </div>
                         </div>
                         <!-- sidebar-widget -->
