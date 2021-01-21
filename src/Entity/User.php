@@ -37,6 +37,11 @@ class User implements UserInterface
      */
     private $password;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Post", mappedBy="user")
+     */
+    private $posts;
+
      /**
      * @var string The plain password
      

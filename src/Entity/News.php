@@ -26,6 +26,12 @@ class News
      * @ORM\Column(type="text")
      */
     private $content;
+     /**
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="news")
+     */
+    private $category;
+
+
 
     /**
      * @ORM\Column(type="datetime")
@@ -51,7 +57,7 @@ class News
    
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255 , nullable=true)
      */
     private $imgUrl;
 
@@ -152,6 +158,17 @@ class News
     public function setImgUrl(string $imgUrl): self
     {
         $this->imgUrl = $imgUrl;
+
+        return $this;
+    }
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

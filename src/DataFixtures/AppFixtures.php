@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Category;
 use App\Entity\News;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -22,6 +23,9 @@ class AppFixtures extends Fixture
         $generator = Faker\Factory::create("fr_FR");
         // $product = new Product();
         // $manager->persist($product);
+        $category= new Category();
+        $category->setName('category1');
+        $manager->persist($category);
         for ($i = 0; $i < 20; $i++) {
 
             $user = new User();
@@ -33,18 +37,22 @@ class AppFixtures extends Fixture
                 ->setEmail($generator->email)
                 ->setPassword($password);
             $manager->persist($user);
+            
             for ($j = 0; $j < rand(10, 50); $j++) {
                 $news = new News();
+
                 $news
                     ->setTitle($generator->sentence())
                     ->setContent($generator->text(2000))
                     ->setStatus(
                         $generator->randomElement(['DRAFT', 'PUBLISHED', 'DELETED'])
                     )
+                    ->setCategory($category)
                     ->setCreatedAt($generator->dateTimeBetween('-1 year', 'now'))
                     ->setImgUrl($generator->imageUrl(750,500))
                     ->setUser($user);
                 $manager->persist($news);
+
             }
         }
         $manager->flush();
